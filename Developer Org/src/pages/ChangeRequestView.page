@@ -1,0 +1,181 @@
+<apex:page standardController="Change_Request__c" extensions="ChangeRequestViewExt">
+    
+    
+<c:importvisualstrap theme="paper" />
+                                           
+    <c:visualstrapblock >
+        <apex:Form id="myForm">
+            <c:panel title="{!crRec.Type__c} : {!crRec.Name}" type="primary">
+                
+                
+                <c:row style="padding-left:15px;padding-right:15px;">
+                    <c:column type="col-md-3 alert alert-success"> 
+                        <div class="modal-header" style="height:25px; ">
+                            <apex:outputLabel styleclass="control-label"> Developed By: </apex:outputLabel>
+                        </div>
+                        <div class="modal-body" style="height:30px;">
+                            <apex:outputField value="{!crRec.OwnerId}"/>
+                        </div>
+                    </c:column>
+                    
+                    <c:column type="col-md-1"> 
+                        
+                    </c:column>
+                    
+                    <c:column type="col-md-4"> 
+                        <div class="modal-header" style="height:25px; ">
+                            <apex:outputLabel styleclass="control-label"> Type: </apex:outputLabel>
+                        </div>
+                        
+                        <div style="height:30px;width:30px">
+                            <apex:inputField value="{!crRec.Type__c}"/>
+                        </div> 
+                    </c:column>
+                    
+                    <c:column type="col-md-4"> 
+                        <div class="modal-header" style="height:25px; ">
+                            <apex:outputLabel styleclass="control-label"> Status: </apex:outputLabel>
+                        </div>
+                        
+                        <div style="height:30px;">
+                            <apex:inputField value="{!crRec.Status__c}"/>
+                        </div> 
+                    </c:column>
+                    
+                    
+                    
+                    
+                </c:row>
+                <c:row style="padding-left:15px;padding-right:15px;">
+                    <c:column type="col-md-5">
+                        <div class="modal-header" style="height:25px; ">
+                                <apex:outputLabel styleclass="control-label"> Reviwed By </apex:outputLabel>
+                        </div>
+                        <div class="modal-body" style="height:30px;">
+                            <apex:inputField value="{!crRec.Reviewed_By__c}"/>
+                        </div>
+                    </c:column>
+                    
+                    
+                    
+                     <c:column type="col-md-4"> 
+                        <div class="modal-header" style="height:25px; ">
+                            <apex:outputLabel styleclass="control-label"> Functional Review Status: </apex:outputLabel>
+                        </div>
+                        
+                        <div class="modal-body" style="height:30px;">
+                            <apex:inputField value="{!crRec.Functional_Review__c}"/>
+                        </div> 
+                    </c:column>
+                </c:row>
+                
+                
+                <c:well >
+                   <apex:outputLabel > Description: </apex:outputLabel>
+                   <apex:inputTextarea richText="true" value="{!crRec.Description__c}" disabled="true"/>  
+                </c:well>
+                
+                <c:well >
+                   <apex:outputLabel > Notes: </apex:outputLabel>
+                   <apex:inputTextarea richText="true" value="{!crRec.Notes__c}" disabled="true"/>  
+                </c:well>
+                
+                
+                
+                <div>
+                    <apex:commandButton value="Cancel" styleClass="btn-warning"/> &nbsp;&nbsp;
+                    <apex:commandButton value="Update" styleClass="btn-success" action="{!updateChangeRequest}" />
+                </div>
+            </c:panel>
+            
+            <c:panel title="Component Modified" type="success">
+                <apex:commandButton value="Add Components"  html-data-toggle="modal" html-data-target="#myCompModal" styleClass="btn-primary btn-md" action="{!initiateComp}" reRender="myCompModal" />                                            
+                
+                <apex:dataTable value="{!compList}" var="comp" styleClass="table table-hover">
+                    <apex:column headerValue="Action">
+                        <apex:commandLink html-data-toggle="modal" html-data-target="#myCompModal" action="{!updateCompRec}" reRender="myCompModal" value="Edit">
+                            <apex:param assignTo="{!compRecId}" value="{!comp.Id}" name="firstParam"/>
+                        </apex:commandLink>
+                        | 
+                        <apex:commandLink action="{!deleteComp}" reRender=""> 
+                            <apex:param assignTo="{!compRecId}" value="{!comp.Id}" name="firstParam"/>
+                            Delete 
+                        </apex:commandLink>
+                    </apex:column> 
+                    <apex:column value="{!comp.Type_of_Modification__c}" headerValue="Type of Modification"/>
+                    <apex:column value="{!comp.Component_Type__c }" headerValue="Component Type"/>
+                    <apex:column value="{!comp.Name}" headerValue="Name"/>
+                    <apex:column value="{!comp.Explanation__c}" headerValue="Explanation"/>
+                </apex:dataTable>
+            </c:panel>
+            
+            
+            <!-- Modal Window for new component -->
+            <div id="myCompModal" class="modal fade" >
+                <apex:outputPanel id="myCompModal">
+                <div class="modal-dialog modal-lg">
+
+                <div class="modal-content">
+                
+                <div class="modal-header">
+                   <h3> Component Modified </h3>
+                </div>
+                
+                <div class="modal-body">
+                    <c:row >
+                        <c:column type="col-md-2">
+                            <apex:outputLabel styleclass="control-label">
+                             Type of Modification 
+                            </apex:outputLabel>
+                        </c:column>
+                        <c:column type="col-md-4">
+                            <apex:inputField value="{!compRec.Type_of_Modification__c}" styleClass="form-control" html-placeholder="Type of Modification" />
+                        </c:column>
+                        
+                        
+                        <c:column type="col-md-2">
+                            <apex:outputLabel styleclass="control-label">
+                             Component Type   
+                            </apex:outputLabel>
+                        </c:column>
+                        <c:column type="col-md-4">
+                            <apex:inputField value="{!compRec.Component_Type__c}" styleClass="form-control" html-placeholder="Component Type" />
+                        </c:column>
+                    </c:row>
+                
+                    <c:row >
+                        <c:column type="col-md-2">
+                            <apex:outputLabel styleclass="control-label">
+                             Component API Name    
+                            </apex:outputLabel>
+                        </c:column>
+                        <c:column type="col-md-4">
+                            <apex:inputField value="{!compRec.Name}" styleClass="form-control" html-placeholder="Component Name" /> 
+                        </c:column>
+                        
+                        <c:column type="col-md-2">
+                            <apex:outputLabel styleclass="control-label">
+                             Explanation    
+                            </apex:outputLabel>
+                        </c:column>
+                        <c:column type="col-md-4">
+                            <apex:inputField value="{!compRec.Explanation__c}" styleClass="form-control" html-placeholder="Explanation" />
+                        </c:column>
+                    </c:row>
+                </div>
+                    
+                <div class="modal-footer">
+                    <apex:commandButton value="Close" styleClass="btn-warning" html-data-dismiss="modal"/>
+                    <apex:commandButton value="Save Component" styleClass="btn-success" action="{!saveComponent}"/>
+                </div>
+
+                </div>
+                </div>
+                </apex:outputPanel>
+            </div> 
+            
+            <!-- Modal Window Ends --> 
+            
+        </apex:Form>  
+    </c:visualstrapblock>
+</apex:page>

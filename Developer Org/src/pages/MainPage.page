@@ -1,0 +1,20 @@
+<apex:page sidebar="false" showHeader="false">
+<table border="1" width="200">
+<tr>
+<td>
+<apex:include pageName="Page1"/>
+</td>
+<td>
+<apex:include pageName="Page2"/>
+</td>
+</tr>
+<tr>
+<td>
+<apex:include pageName="Page3"/>
+</td>
+<td>
+<apex:include pageName="Page4"/>
+</td>
+</tr>
+</table>
+</apex:page>

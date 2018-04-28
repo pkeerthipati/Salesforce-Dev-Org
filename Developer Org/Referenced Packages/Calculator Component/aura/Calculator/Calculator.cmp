@@ -1,0 +1,31 @@
+<aura:component implements="flexipage:availableForAllPageTypes">
+ <ltng:require styles="/resource/ACalculator__calcStyle"/>
+    <ltng:require scripts="/resource/ACalculator__calc/jquery-1.7.1.js,/resource/ACalculator__calc/Calculator.js,/resource/ACalculator__fix"/>
+    <aura:handler event="aura:doneRendering" action="{!c.doneRendering}"/>
+<aura:attribute name="isDoneRendering" type="Boolean" default="false"/>
+    <html>
+        
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<title>Calculator</title>
+
+    
+   
+    
+</head>
+<body class="calcbody" style="zoom: 150%;  display: -webkit-box;display: -moz-box;display: -ms-flexbox;display: flex;">
+    <div  style="margin-left:auto;margin-right:auto;width:200px;">
+	<div class="calPanl">
+		<div class="showPanl" >
+			<input type="text" style="border: 0px solid;" id="showval" value="0" readonly="readonly" />
+		</div>
+		<div class="leftPanl">
+			<div class="ctrlPanl" ></div>
+			<div class="numPanl" ></div>
+		</div>
+		<div class="operPanl"></div>
+	</div>
+    </div>
+        </body>
+</html>
+</aura:component>

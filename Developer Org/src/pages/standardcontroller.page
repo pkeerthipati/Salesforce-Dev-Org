@@ -1,0 +1,52 @@
+<apex:page standardController="Account" extensions="ExtCont" showHeader="false" showChat="false" recordSetVar="accs">
+    <!--<apex:listViews type="Account" rendered="true" />  <!-- List view of Account-->
+    <!--apex:listviews type="Contact"/>   <!-- List view of contact -->
+    <!--<apex:detail relatedList="true" inlineEdit="true" relatedListHover="true"/>   <!-- Detail page of Account that the Id passed in URl -->
+    <!--<apex:relatedList rendered="true" list="Contacts"/>    <!-- Related list of Contact related to Account that the Id passed in URl --> 
+    <!--<apex:relatedList rendered="true" list="Opportunities"/>     <!-- Related list of Opportunity related to Account that the Id passed in URl--> 
+    <apex:pageblock title="Page Block" id="pbt">
+        <apex:pageblockSection title="Page Block Section">
+        <apex:pageBlockSectionItem >
+            <apex:outputtext >Name</apex:outputtext>
+            <apex:outputfield value="{!Account.name}"/>
+        </apex:pageBlockSectionItem>     
+        <apex:pageBlockSectionItem >    
+            <apex:outputText >Rating</apex:outputText>
+            <apex:outputField value="{!Account.Rating}"/>
+        </apex:pageBlockSectionItem>    
+        </apex:pageblockSection>
+    </apex:pageblock>
+    <apex:pageBlock title="Page Block 2">
+    <apex:outputField value="{!accs[0].Name}"/>
+        <apex:pageBlockTable value="{!accs}" var="acc">
+            
+            <apex:column headerValue="Name">
+                <apex:outputfield value="{!acc.Name}"/>
+            </apex:column>
+            <apex:column headerValue="Rating">
+                <apex:outputfield value="{!acc.rating}"/>
+            </apex:column>
+            <apex:column headerValue="AccountNumber">
+                <apex:outputfield value="{!acc.AccountNumber}"/>
+            </apex:column>  
+        </apex:pageBlockTable>
+        
+        <apex:dataTable value="{!accs}" var="acc">
+        <table border="1">
+            <tr>
+            <td>
+            <apex:column headerValue="Name">
+                <apex:outputfield value="{!acc.Name}"/>
+            </apex:column>
+            </td>
+            <td>
+            <apex:column headerValue="Rating">
+                <apex:outputfield value="{!acc.rating}"/>
+            </apex:column>
+            </td>
+            </tr>
+        </table>        
+        </apex:dataTable>
+        
+    </apex:pageBlock>
+</apex:page>

@@ -1,0 +1,14 @@
+.THIS{    
+}
+.THIS .parent{
+   	height: 350px;
+	overflow-x: hidden;
+    overflow-y: auto;
+}
+
+@media screen and (max-width: 980px)
+{
+    .THIS .parent{
+        height: 100%;
+    }
+}

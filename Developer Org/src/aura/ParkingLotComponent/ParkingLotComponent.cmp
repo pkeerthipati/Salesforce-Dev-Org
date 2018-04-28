@@ -1,0 +1,106 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+	<div class="slds-page-header">
+        <div class="slds-media">
+            <div class="slds-media__figure">
+                <span class="slds-icon_container slds-icon-standard-opportunity" title="Description of icon when needed">
+                    
+                </span>
+            </div>
+            <div class="slds-media__body">
+                <h1 class="slds-page-header__title slds-truncate slds-align-middle" title="Parking Admin Screen">Parking Admin Screen</h1>
+            </div>
+            
+            <div class="demo-only slds-grid" style="height: 845px; max-width: 420px; background: rgb(244, 246, 249); padding: 1rem;">
+              <div class="slds-panel slds-grid slds-grid_vertical slds-nowrap">
+                <div class="slds-form slds-form_stacked slds-grow slds-scrollable_y">
+                  <div class="slds-panel__section slds-border_bottom">
+                    <div class="slds-media">
+                      <div class="slds-media__figure">
+                        <span class="slds-checkbox">
+                          <input type="checkbox" name="options" id="checkbox-2" value="on" />
+                          <label class="slds-checkbox__label" for="checkbox-2">
+                            <span class="slds-checkbox_faux"></span>
+                            <span class="slds-form-element__label slds-assistive-text">Complete Task</span>
+                          </label>
+                        </span>
+                      </div>
+                      <div class="slds-media__body">
+                        <h2 class="slds-truncate slds-text-heading_small" title="Follow up on '15 contact"><a href="javascript:void(0);">Follow up on '15 contact</a></h2>
+                        <p class="slds-truncate slds-text-body_small" title="Jun 18">Jun 18</p>
+                        <div class="slds-button-group slds-m-top_small" role="group">
+                          <button class="slds-button slds-button_neutral slds-grow">Edit</button>
+                          <button class="slds-button slds-button_neutral slds-grow">Follow Up</button>
+                          <button class="slds-button slds-button_neutral slds-grow">Delete</button>
+                          <button class="slds-button slds-button_icon slds-button_icon-border-filled" aria-haspopup="true" title="More Actions">
+                            
+                            <span class="slds-assistive-text">More Actions</span>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="slds-panel__section">
+                    <h3 class="slds-text-heading_small slds-m-bottom_medium">Task Information</h3>
+                    <ul>
+                      <li class="slds-form-element slds-hint-parent slds-border_bottom">
+                        <span class="slds-form-element__label">Subject</span>
+                        <div class="slds-form-element__control">
+                          <span class="slds-form-element__static">Follow up on '15 Contract</span>
+                        </div>
+                      </li>
+                      <li class="slds-form-element slds-hint-parent slds-border_bottom">
+                        <span class="slds-form-element__label">Due Date</span>
+                        <div class="slds-form-element__control">
+                          <span class="slds-form-element__static">6/18/16</span>
+                        </div>
+                      </li>
+                      <li class="slds-form-element slds-hint-parent slds-border_bottom">
+                        <span class="slds-form-element__label">Assigned TO</span>
+                        <div class="slds-form-element__control">
+                          <span class="slds-form-element__static">Jason Dewar</span>
+                        </div>
+                      </li>
+                      <li class="slds-form-element slds-hint-parent slds-border_bottom">
+                        <span class="slds-form-element__label">Name</span>
+                        <div class="slds-form-element__control">
+                          <span class="slds-form-element__static">Adam Choi</span>
+                        </div>
+                      </li>
+                      <li class="slds-form-element slds-hint-parent slds-border_bottom">
+                        <span class="slds-form-element__label">Related To</span>
+                        <div class="slds-form-element__control">
+                          <span class="slds-form-element__static">Tesla Cloudhub + Anypoint Connectors</span>
+                        </div>
+                      </li>
+                      <li class="slds-form-element slds-hint-parent slds-border_bottom">
+                        <span class="slds-form-element__label">Comments</span>
+                        <div class="slds-form-element__control">
+                          <span class="slds-form-element__static slds-text-longform">Adam was open to doing more business in the 4th quarter. Follow up with marketing demo and email templates.</span>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="slds-panel__section">
+                    <h3 class="slds-text-heading_small slds-m-bottom_medium">Additional Information</h3>
+                    <ul>
+                      <li class="slds-form-element slds-hint-parent slds-border_bottom">
+                        <span class="slds-form-element__label">Status</span>
+                        <div class="slds-form-element__control">
+                          <span class="slds-form-element__static">Not Started</span>
+                        </div>
+                      </li>
+                      <li class="slds-form-element slds-hint-parent slds-border_bottom">
+                        <span class="slds-form-element__label">Priority</span>
+                        <div class="slds-form-element__control">
+                          <span class="slds-form-element__static">Normal</span>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+        </div>
+    </div>
+</aura:component>

@@ -1,0 +1,113 @@
+<aura:component implements="force:appHostable" controller="Webkul_cm.BookingController">
+	<ltng:require styles="{!$Resource.Webkul_cm__SLDS +
+                          '/assets/styles/salesforce-lightning-design-system-ltng.css'}"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.getList}"/>
+    
+    <aura:attribute name="bookings" type="Webkul_cm__Booking__c[]"/>
+    
+    <aura:attribute name="newBooking" type="Webkul_cm__Booking__c"
+         default="{ 'sobjectType': 'Webkul_cm__Booking__c',
+                         'Webkul_cm__Drop_Point__c': '',
+                         'Webkul_cm__Vehicle__c': '',
+                  		 'Webkul_cm__Time_Slot__c': '',
+                  		 'Webkul_cm__Route__c':'',
+                  		 'Webkul_cm__Booking_Date__c':''
+                       }"/>
+    <aura:attribute name="route" type="Webkul_cm__Route__c[]"/>
+    <aura:attribute name="dropPoint" type="Webkul_cm__Drop_Point__c[]"/>
+    <aura:attribute name="timeSlot" type="Webkul_cm__Time_Slot__c[]"/>
+    <aura:attribute name="vehicle" type="Webkul_cm__Vehicle__c[]"/>
+    
+    
+    <aura:attribute name="frameSrc" type="String"/>
+    
+    
+    <div class="wk_static">        
+        <div class="slds-modal__header">
+            <div class="slds-grid">
+                <div class="slds-col slds-has-flexi-truncate">
+                    <div class="slds-media slds-no-space slds-grow">                        
+                        <div class="slds-media__body ">
+                            <div class="slds-media__figure header" >
+                                <span class="slds-icon_container slds-icon-custom-custom45">
+                                    <Webkul_cm:VehicleSVG class="slds-icon" xlinkHref="{!$Resource.Webkul_cm__SLDS +'/assets/icons/custom-sprite/svg/symbols.svg#custom45'}" />
+                                    <span class="slds-assistive-text">Booking Icon</span>
+                                </span>
+                            </div>
+							<div class="header">
+                            	<p class="slds-text-heading--label slds-truncate  ">Booking</p>
+								<h1 class="slds-page-header__title slds-m-right--small slds-truncate slds-align-middle" title="Book Your Cab">Book Your Cab</h1>
+                            </div>
+						</div>                      
+					</div>
+				</div>            	             
+        	</div>
+        </div>       
+        <div class= "slds-form--horizontal slds-m-top--small slds-p-horizontal--small">
+            <div class="slds-form-element">
+                <div class="slds-form-element ">
+                    <label class="slds-form-element__label" for="vName">Select Route</label>
+                    <div class="slds-form-element__control ">
+                        <ui:inputSelect aura:id="route"  class="slds-input length" value="{!v.newBooking.Webkul_cm__Route__c}" change="{!c.getdrop}">
+                        	<ui:inputSelectOption text="" label="--None--"/>
+                            <aura:iteration items="{!v.route}" var="key">
+                              	<ui:inputSelectOption text="{!key.Id}" label="{!key.Name}"/>
+                            </aura:iteration>
+                        </ui:inputSelect>
+                    </div>
+                </div>
+            </div>
+            <div class="slds-form-element">
+                <div class="slds-form-element ">
+                    <label class="slds-form-element__label" for="dropPoint">Select Drop Point</label>
+                    <div class="slds-form-element__control">
+                        <ui:inputSelect aura:id="dropPoint"  class="slds-input length"  value="{!v.newBooking.Webkul_cm__Drop_Point__c}" required="true">
+                        	<ui:inputSelectOption text="" label="--None--"/>
+                            <aura:iteration items="{!v.dropPoint}" var="key">
+                              	<ui:inputSelectOption text="{!key.Id}" label="{!key.Name}"/>
+                            </aura:iteration>
+                        </ui:inputSelect>
+                    </div>
+                </div>
+            </div>
+            <div class="slds-form-element">
+                <div class="slds-form-element ">
+                    <label class="slds-form-element__label" for="timeslot">Select Booking Date</label>
+                    <div class="slds-form-element__control ">
+						<ui:inputDate aura:id="dateField" class="slds-input length" value="{!v.newBooking.Webkul_cm__Booking_Date__c}" displayDatePicker="true" required="true"/>
+                    </div>
+                </div>
+            </div>
+            <div class="slds-form-element">
+                <div class="slds-form-element ">
+                    <label class="slds-form-element__label" for="timeslot">Select Time Slot</label>
+                    <div class="slds-form-element__control ">
+                        <ui:inputSelect aura:id="timeslot" class="slds-input length" value="{!v.newBooking.Webkul_cm__Time_Slot__c}" change="{!c.getVehicle}" required="true">
+                        	<ui:inputSelectOption text="" label="--None--"/>
+                            <aura:iteration items="{!v.timeSlot}" var="key">
+                              	<ui:inputSelectOption text="{!key.Id}" label="{!key.Name}"/>
+                            </aura:iteration>
+                        </ui:inputSelect>
+                    </div>
+                </div>
+            </div>
+            <div class="slds-form-element">
+                <div class="slds-form-element ">
+                    <label class="slds-form-element__label" for="vehicle">Vehicles with Available Seats</label>
+                    <div class="slds-form-element__control length">
+                        <ui:inputSelect aura:id="vehicle"  class="slds-input length" value="{!v.newBooking.Webkul_cm__Vehicle__c}" required="true">
+                        	<ui:inputSelectOption text="" label="--None--"/>
+                            <aura:iteration items="{!v.vehicle}" var="key">
+                              	<ui:inputSelectOption text="{!key.Id}" label="{!key.Name+'('+key.Webkul_cm__Seats_Available__c+')'}"/>
+                            </aura:iteration>
+                        </ui:inputSelect>
+                    </div>
+                </div>
+            </div>            
+        </div>
+        <div class="slds-m-top--small slds-text-align--center">
+        	<ui:button class="slds-button slds-button--brand" press="{!c.createBooking}">Save</ui:button>
+        </div>        
+	</div>
+</aura:component>

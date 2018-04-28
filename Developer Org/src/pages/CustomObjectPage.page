@@ -1,0 +1,5 @@
+<apex:page standardController="Pursuit__c" extensions="CustomObjectExtension">
+
+<apex:detail />
+
+</apex:page>

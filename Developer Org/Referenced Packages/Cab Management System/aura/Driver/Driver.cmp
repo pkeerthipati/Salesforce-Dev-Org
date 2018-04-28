@@ -1,0 +1,113 @@
+<aura:component controller="Webkul_cm.DriverListController">
+	<ltng:require styles="{!$Resource.Webkul_cm__SLDS +
+	         '/assets/styles/salesforce-lightning-design-system-ltng.css'}"/>
+    <aura:handler name="init" value="{!this}" action="{!c.getVehicle}"/>
+    <aura:registerEvent name="DriverEvent" type="Webkul_cm:VehicleEvent"/>
+    <aura:attribute name="vehicles" type="Webkul_cm__Vehicle__c[]"/>
+	<aura:attribute name="Driver" type="Webkul_cm__Driver__c[]"/>
+    <aura:attribute name="Drivers" type="Webkul_cm__Driver__c[]"/>
+	<aura:attribute name="newDriver" type="Webkul_cm__Driver__c"
+         default="{ 'sobjectType': 'Webkul_cm__Driver__c',
+                         'Name': '',
+                         'Webkul_cm__First_Name__c': '',
+                         'Webkul_cm__Phone_Number__c': 0,
+                         'Webkul_cm__Birthdate__c': '',
+                         'Webkul_cm__Mailing_City__c': '',
+                  		 'Webkul_cm__Mailing_Country__c': '',
+                  		 'Webkul_cm__Mailing_State_Province__c': '',
+                  		 'Webkul_cm__Mailing_Zip_Postal_Code__c': '',
+                  		 'Webkul_cm__Active__c': 'False',
+                  		 'Webkul_cm__Description__c':''
+                       }"/>
+	<div class ="wk_static">       
+        <div class="modal-body scrollable slds-modal__content slds-p-around--medium parent">        	
+            <div c-lass= "slds-form--stacked">
+                <div class="slds-form-element">
+                    <div class="slds-form-element slds-is-required">
+                        <div class="slds-form-element__control">
+                        	<ui:inputText aura:id="DFName" label="First Name" class="slds-input" labelClass="slds-form-element__label" value="{!v.newDriver.Webkul_cm__First_Name__c}"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-form-element">
+                    <div class="slds-form-element__control">
+                    	<ui:inputText aura:id="DLName" label="Last Name" class="slds-input" labelClass="slds-form-element__label" value="{!v.newDriver.Name}" required="true"/>
+                    </div>
+                </div>                
+                <div class="slds-form-element">
+                    <div class="slds-form-element__control">
+                    	<ui:inputphone aura:id="Dphnnum" label="Phone Number" class="slds-input" labelClass="slds-form-element__label" value="{!v.newDriver.Webkul_cm__Phone_Number__c}" required="true"/>           
+                    </div>
+                </div>
+                <div class="slds-form-element">
+                    <div class="slds-form-element__control">
+                    	<ui:inputSelect aura:id="Dvehicle" label="Vehicle" class="slds-input" labelClass="slds-form-element__label" value="{!v.newDriver.Webkul_cm__Vehicle__c}">
+                            <ui:inputSelectOption text="" label="--None--"/>
+                            <aura:iteration items="{!v.vehicles}" var="vehicle">
+                                <ui:inputSelectOption text="{!vehicle.Id}" label="{!vehicle.Name}"/>
+                            </aura:iteration>
+                        </ui:inputSelect>
+                    </div>
+                </div>
+                <div class="slds-form-element">
+                    <div class="slds-form-element__control">
+                    	<ui:inputSelect aura:id="Ddriver" label="Driver" class="slds-input" labelClass="slds-form-element__label" value="{!v.newDriver.Webkul_cm__Driver__c}">
+                        	<ui:inputSelectOption text="" label="--None--"/>
+                            <aura:iteration items="{!v.Drivers}" var="key">
+                                <ui:inputSelectOption text="{!key.Id}" label="{!key.First_Name__c+' '+key.Name}"/>
+                            </aura:iteration>
+                        </ui:inputSelect>
+                    </div>
+                </div>
+                <div class="slds-form-element">
+                    <div class="slds-form-element__control">
+                    	<ui:inputDate aura:id="BirthDate" label="Birthdate" class="slds-input" labelClass="slds-form-element__label" value="{!v.newDriver.Webkul_cm__Birthdate__c}" displayDatePicker="true"/>           
+                    </div>
+                </div>
+                <div class="slds-form-element">
+                    <div class="slds-form-element__control">
+                    	<ui:inputText aura:id="DMailStreet" label="Mailing Street" class="slds-input" labelClass="slds-form-element__label" value="{!v.newDriver.Webkul_cm__Mailing_Street__c}"/>           
+                    </div>
+                </div>                
+                <div class="slds-form-element">
+                    <div class="slds-form-element__control">
+                    	<ui:inputText aura:id="DMailCity" label="Mailing City" class="slds-input" labelClass="slds-form-element__label" value="{!v.newDriver.Webkul_cm__Mailing_City__c}"/>           
+                    </div>
+                </div>
+                <div class="slds-form-element">
+                    <div class="slds-form-element__control">
+                    	<ui:inputText aura:id="DMailState" label="Mailing State Province" class="slds-input" labelClass="slds-form-element__label" value="{!v.newDriver.Webkul_cm__Mailing_State_Province__c}"/>           
+                    </div>
+                </div>
+                <div class="slds-form-element">
+                    <div class="slds-form-element__control">
+                    	<ui:inputText aura:id="DMailCountry" label="Mailing Country" class="slds-input" labelClass="slds-form-element__label" value="{!v.newDriver.Webkul_cm__Mailing_Country__c}"/>           
+                    </div>
+                </div>
+                <div class="slds-form-element">
+                    <div class="slds-form-element__control">
+                    	<ui:inputText aura:id="DMailZip" label="Mailing Zip Postal Code" class="slds-input" labelClass="slds-form-element__label" value="{!v.newDriver.Webkul_cm__Mailing_Zip_Postal_Code__c}"/>           
+                    </div>
+                </div>
+                <div class="slds-form-element">
+                    <div class="slds-form-element__control">
+                    	<ui:inputCheckBox aura:id="DActive" label="Active" class="slds-checkbox" labelClass="slds-form-element__label" value="{!v.newDriver.Webkul_cm__Active__c}"/>           
+                    </div>
+                </div>
+                <div class="slds-form-element">
+                    <div class="slds-form-element__control">
+                    	<ui:inputTextarea aura:id="DDes" label="Description" class="slds-input" labelClass="slds-form-element__label" value="{!v.newDriver.Webkul_cm__Description__c}"/>           
+                    </div>
+                </div>
+            </div>        
+        </div>
+       	<div class="slds-modal__footer">
+           	<div class="slds-form-element">
+               	<div class="slds-form-element__control">
+                   	<ui:button aura:id="button1" class="slds-button slds-buttonneutral slds-not-selected" press="{!c.removeComponent}">Cancel</ui:button>
+                    <ui:button class="slds-button slds-button--neutral slds-button--brand slds-not-selected" press="{!c.createDriver}">Save</ui:button>                            
+                </div>
+            </div>
+        </div>
+    </div>    
+</aura:component>

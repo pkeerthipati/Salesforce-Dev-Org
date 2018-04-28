@@ -1,0 +1,156 @@
+<apex:page id="thePage" applyHtmlTag="false" applyBodyTag="false" docType="html-5.0" showHeader="false" controller="Webkul_cm.RouteListController" standardStylesheets="false">
+  <apex:includescript value="{!urlfor($Resource.Webkul_cm__JQuery,'/Jquery/jquery_3.1.1.min.js')}"/>
+  <apex:stylesheet value="{!urlfor($Resource.Webkul_cm__SLDS,'/assets/styles/salesforce-lightning-design-system-ltng.css')}"/>
+  <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" lang="en">
+    <head>
+      <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
+      <meta charset="utf-8"/>
+      <title>Directions service</title>
+      <style>
+        html, body {
+          height: 100%;
+          margin: 0;
+          padding: 0;
+        }
+        #map {
+          height: 200px;
+        }       
+        #Mybutton,#GetLocation,#lightning{
+          display: none;
+        }                
+      </style>
+    </head>
+    <body>
+      <apex:form id="theForm">
+        
+        <div class="wk_static">
+          <div class= "slds-form--horizontal ">                 
+                  <div class="slds-form-element">
+                    <label class="slds-form-element__label" for="vName">Start Point</label>
+                    <div class="slds-form-element__control ">
+                        <apex:inputtext id="start" html-placeholder="Click on the map to get Start Point" styleClass="slds-input" value="{!startpoint}" />
+                    </div>
+                </div>
+                <div class="slds-form-element slds-m-top--none">
+                    <label class="slds-form-element__label" for="dropPoint">End Point</label>
+                    <div class="slds-form-element__control">
+                        <apex:inputtext id="end" html-placeholder="Click on the map to get End Point" styleClass="slds-input slds-m-bottom--xx-small" value="{!endpoint}"/>
+                    </div>
+                </div>
+                <apex:actionfunction name="myFunc" action="{!saveRoute}" rerender="theForm"/>
+            <button type="button" id="Mybutton">Mybutton</button>
+            <button type="button" id="GetLocation">GetLocation</button>  
+              </div>
+              <div role="dialog" tabindex="-1" id="Modalbox" aria-labelledby="header43" class="slds-modal ">
+                <div class="slds-modal__container">
+                    <div class="slds-modal__header">                        
+                        <h2 id="header43" class="slds-text-heading--medium">Confirm</h2>
+                    </div>
+                    <div class="slds-modal__content slds-p-around--medium">
+                        <div class="content">
+                           
+                        </div>
+                    </div>
+                    <div class="slds-modal__footer">
+                       <button id="btnYes" type="button" class="slds-button slds-button--neutral slds-button--brand">Ok</button>
+                         <button id="btnNo" type="button" class="slds-button slds-button--neutral" >Cancel</button>                       
+                    </div>
+                </div>
+            </div>
+            <div class="slds-backdrop " id="MB-Back"></div>  
+        </div>
+        <apex:pageMessages />    
+      </apex:form>
+      <div id ="map"></div> 
+      <script>
+        var i = 0;
+        function initMap() {          
+          var directionsService = new google.maps.DirectionsService;
+          var directionsDisplay = new google.maps.DirectionsRenderer();
+          var map = new google.maps.Map(document.getElementById('map'), {
+                                             zoom: 7,
+                                               center: {lat: 28.6139, lng: 77.2090}
+                                           });
+          directionsDisplay.setMap(map);
+                
+            google.maps.event.addListener(map, 'click', function (e) {
+                    //alert("Latitude: " + e.latLng.lat() + "\r\nLongitude: " + e.latLng.lng());
+                         if(i<2){
+                          i++;
+                          var latlng =new google.maps.LatLng(e.latLng.lat(),e.latLng.lng());
+                      
+                          var geocoder = new google.maps.Geocoder();
+                          geocoder.geocode({ 'latLng': latlng }, function (results, status) {
+                              if (status == google.maps.GeocoderStatus.OK) {                        
+                                  if (results[1]) {
+                                      var infowindow = new google.maps.InfoWindow({
+                                              content:  results[1].formatted_address
+                                          });
+                                      //alert("Location: " + results[1].formatted_address);
+                                      var image;
+                                      if(i==1){               
+                          image = "{!URLFOR($Resource.cab,'/cab/StartPoint.png')}";
+                        }else if(i==2){               
+                          image = "{!URLFOR($Resource.cab,'/cab/EndPoint.png')}";
+                        }
+                                      var marker = new google.maps.Marker({
+                                          position: latlng,
+                                          map: map,
+                                          icon:image,
+                                          title: results[1].formatted_address
+                                      });
+                                       marker.addListener('click', function(){
+                                           infowindow.open(map, marker);
+                                       });
+                                        $("#Modalbox").addClass('slds-fade-in-open');
+                                        $('#MB-Back').addClass('slds-backdrop--open');
+                                       if(i==1){                                             
+                                              dialog("Are you sure you want to mark this place as Start Point?",function(){
+                                                $('[id$="start"]').val(results[1].formatted_address);                                                
+                                              },function(){
+                                                i--;                                                
+                                             });
+                                              
+                                           }else if(i==2){
+                                              dialog("Are you sure you want to mark this place as End Point?",function(){
+                                                $('[id$="end"]').val(results[1].formatted_address);
+                                                myFunc();
+                                                
+                                              },function(){
+                                                i--;
+                                              });                                       
+                                              
+                                           }else{                                         
+                                       }
+                               function dialog(message, yesCallback, noCallback) {
+                                    $('.content').html(message);
+                          
+                                    $('#btnYes').click(function() {
+                                        //dialog.dialog('close');
+                                        yesCallback();
+                                        $('#Modalbox').removeClass('slds-fade-in-open');
+                                        $('#MB-Back').removeClass('slds-backdrop--open');                                        
+                                    });
+                                    $('#btnNo').click(function() {
+                                        //dialog.dialog('close');
+                                        noCallback();
+                                        
+                                        $('#Modalbox').removeClass('slds-fade-in-open');
+                                        $('#MB-Back').removeClass('slds-backdrop--open');
+                                    });
+                                }
+                                  }
+                              }
+                          });
+                          
+                         }else{
+                          e.preventDefault();
+                         }
+                         
+                  });         
+        }       
+      </script>
+      <script async="true" defer="true" src="{!urlfor($Resource.JQuery,'/Jquery/map.js')}"/>
+    </body>
+  </html>
+</apex:page>

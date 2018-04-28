@@ -1,0 +1,51 @@
+<apex:page controller="HomePageTaskController" sidebar="false" showHeader="false" action="{!getParentTasks}">
+<script>
+    window.onload = function(e){ 
+        alert(window.location.hostname);
+         alert('{!$Profile.Name}');  
+     }
+</script>
+<apex:form >
+<apex:pageBlock title="My Tasks">
+<apex:pageBlockbuttons > 
+<apex:commandButton value="New" action="{!NewPage}"/>
+</apex:pageBlockbuttons>
+<apex:pageBlockSection >
+<apex:pageblockTable value="{!lstUserParentTasks}" var="ct" columnsWidth="100px,200px,400px,150px,500px,200px" width="500%">
+    <apex:column width="20">
+    <apex:facet name="header" >Complete</apex:facet>
+    
+    <apex:outputLink value="/{!CT.Id}/e?close=1&retURL=%2Fhome%2Fhome.jsp">Edit</apex:outputLink>
+
+  </apex:column>
+  <apex:column width="50">
+    <apex:facet name="header" >Id</apex:facet>
+    
+    <apex:outputLink value="/{!CT.Id}">{!CT.Id}</apex:outputLink>
+
+  </apex:column>
+  <apex:column width="50">
+    <apex:facet name="header" >Related to Object</apex:facet>
+    <apex:outputLink value="/{!CT.WhatId}">{!CT.What.Name}</apex:outputLink>
+    
+  </apex:column>
+  
+  <apex:column width="50">
+    <apex:facet name="header" >Related to Contact</apex:facet>
+    <apex:outputText value="{!CT.Who.Name}" />
+  </apex:column>
+  
+  <apex:column width="30">
+    <apex:facet name="header" >Subject</apex:facet>
+    <apex:outputLink value="/{!CT.Id}">{!CT.Subject}</apex:outputLink>
+    
+  </apex:column>
+  <apex:column width="40">
+    <apex:facet name="header" >Status</apex:facet>
+    <apex:outputText value="{!CT.Status}" />
+  </apex:column>
+  </apex:pageblockTable>
+</apex:pageBlockSection> 
+</apex:pageBlock>
+</apex:form>
+</apex:page>

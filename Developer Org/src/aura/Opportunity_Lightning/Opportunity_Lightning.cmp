@@ -1,0 +1,6 @@
+<aura:component controller="OpportunityController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" access="global" >
+	<ui:button label="Get Opportunities" press="{!c.getOpps}"/> <br/>
+    <aura:iteration var="opportunity" items="{!v.opportunities}">
+        <p>{!opportunity.Name} : {!opportunity.CloseDate}</p> <br/>
+    </aura:iteration>
+</aura:component>

@@ -1,0 +1,20 @@
+<apex:page controller="TaskCreationController" sidebar="false" showHeader="false">
+    <apex:form id="form">
+        <apex:pageBlock title="Create Tasks">
+            <div align="center">
+            <apex:commandButton value="New task" action="{!addNewTask}" reRender="form"/>
+            <apex:commandButton value="Insert tasks" action="{!insertTasks}"/>
+            </div>
+            <apex:pageBlockSection columns="5">
+                <apex:repeat var="task" value="{!taskList}" >
+                    <apex:inputField value="{!task.WhatId}" />
+                    <apex:inputField value="{!task.WhoId}" />
+                    <apex:inputField value="{!task.Subject}" />
+                    <apex:inputField value="{!task.status}" />
+                    <apex:inputField value="{!task.description}" />
+                </apex:repeat>
+                
+            </apex:pageBlockSection> 
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

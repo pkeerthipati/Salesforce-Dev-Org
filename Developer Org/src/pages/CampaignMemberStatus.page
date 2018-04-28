@@ -1,0 +1,39 @@
+<apex:page standardController="Campaign" extensions="Cmemberstatus_Controller" standardStylesheets="false"  sidebar="false" showHeader="false" docType="html-5.0">
+    <apex:form id="myForm">
+        <apex:pageBlock >
+            <apex:pageblocksection >
+                
+            </apex:pageblocksection>
+            <apex:pageblockTable value="{!cWList}" var="cW" border="0" cellspacing="0" cellpadding="0">
+                  <apex:column value="{!cW.status}" headerValue="Status"/>
+                  <apex:column headerValue="Responded">
+                    <apex:inputcheckbox value="{!cW.Responded}" disabled="true"/>
+                  </apex:column>
+                  <apex:column headerValue="Default">
+                    <apex:inputcheckbox value="{!cW.def}" disabled="true"/>
+                  </apex:column>
+           </apex:pageBlockTable>
+           <apex:actionRegion >
+           <apex:outputpanel id="addblock" rendered="{!openpopup}">
+           <table>
+            <tr>
+                <td>Status</td>
+                <td>Responded</td>
+                <td>Default</td>
+            </tr>    
+            <tr>
+                <td><apex:inputtext value="{!status}"/></td>
+                <td><apex:inputcheckbox value="{!responded}"/></td>
+                <td><apex:inputcheckbox value="{!def}"/></td>
+            </tr>
+            <tr>
+                
+            </tr>
+            </table>
+            </apex:outputpanel>
+            </apex:actionRegion>
+           <apex:CommandButton reRender="myForm" value="New Status" rendered="{!!openpopup}" action="{!showpopup}" /> 
+           <apex:commandButton value="Submit" action="{!addStatus}" rendered="{!openpopup}" rerender="myForm"/>             
+        </apex:pageblock>
+    </apex:form>
+</apex:page>

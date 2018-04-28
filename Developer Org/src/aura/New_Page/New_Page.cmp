@@ -1,0 +1,8 @@
+<aura:component controller="dcontroller" implements='force:hasRecordId'>
+    
+    <link href="assets/styles/salesforce-lightning-design-system-vf.css" rel="stylesheet"/>
+  <aura:handler name="init" value="{!this}" action="{!c.doInit}" /> 
+    <aura:attribute name="recordId" type="Id" />
+	
+    <ui:inputSelect class="slds-col slds-media slds-media--center" aura:id="InputSelectDynamic"/>
+</aura:component>

@@ -1,0 +1,7 @@
+.THIS.changeMe {
+    background-color:Red;
+    width:200px;
+}.THIS.Toggle {
+    display:none;
+    visibility:hidden;
+}

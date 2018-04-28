@@ -1,0 +1,33 @@
+.THIS {
+}
+.THIS .slds-input.length{
+    width: 50%;
+}
+.THIS .HIDE{
+    display: none;
+}
+.THIS .header{
+    display: inline-block;
+    vertical-align: middle;
+    text-align: start;
+}
+.THIS .frameClass{
+    width: 100%;
+    height: 52px;
+    margin: -12px 0px -8px -2px;
+    border: none;
+    overflow: hidden;  
+}
+.THIS .uiInput--datetime .datePicker-openIcon{
+    display: none;
+}
+@media screen and (max-width: 768px){
+    .THIS .slds-input.length{
+        width: 100%;
+    }
+    .THIS .frameClass{
+        width: 100%;
+        height: 75px;
+        margin: -12px 0px -8px -2px;  
+    }
+}

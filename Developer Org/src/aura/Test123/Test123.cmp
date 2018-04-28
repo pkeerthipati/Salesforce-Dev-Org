@@ -1,0 +1,30 @@
+<!-- controller: getAccounts references the getAccounts.apxc Apex class -->
+ <aura:component implements="flexipage:availableForAllPageTypes,force:hasRecordId,force:lightningQuickAction" controller="getAccounts">
+
+<!-- This event handler calls the init client-side controller to handle initialization. -->
+<aura:handler name="init" action="{!c.init}" value="{!this}" />
+
+<!-- make the list of Account accessible to your component. -->
+<aura:attribute name="acc" type="Account" />
+
+<!-- define the recordId attribute -->
+<aura:attribute name="recordId" type="Id" />
+
+<!-- reference LDS static resource 
+<ltng:require styles="/resource/slds103/assets/styles/salesforce-lightning-design-system.min.css"/>-->
+
+ <form>
+    <ui:inputText aura:id="client"
+                  label="{!$ObjectType.Account.fields.Name.Label}"
+                  class="form-control"
+                  value="{!v.acc.Name}"
+                  placeholder="Put answer here"
+    />
+    <ui:inputSelect label="Account Source" class="dynamic" aura:id="InputSelectDynamic" value="{!v.acc.AccountSource}" required="true"/> 
+    <br />
+    <ui:button class="form-control" aura:id="button" label="Save" press="{!c.save}"/>
+     
+    
+  </form>
+
+ </aura:component>

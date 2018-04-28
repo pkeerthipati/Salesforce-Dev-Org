@@ -1,0 +1,38 @@
+.THIS {
+}
+.THIS .framediv{
+    height: 238px;
+}
+.THIS .slds-modal{
+    top:80px;    
+}
+.THIS .slds-table td.action,.THIS .slds-table th.action{
+    padding-left: 0;
+}
+.THIS input.uiInput--checkbox.check{
+    display:inline-block;
+	margin-left: 0.25rem;    
+}
+.THIS .slds-input.length{
+    width: 100px;
+}
+.THIS table.dropPointTable thead{
+    position:static;
+}
+.THIS .slds-button.color{
+    background: rgb(159, 170, 181);
+    color:#fff;
+}
+.THIS .slds-button.color:hover {
+    background: rgb(0, 112, 210);
+    color: rgb(216, 237, 255);
+}
+@media screen and (max-width: 786px)
+{   
+    .THIS .slds-modal{
+        top:0;    
+    }
+    .THIS .slds-table td.action{
+        padding-left: 0.5rem;
+    }
+}

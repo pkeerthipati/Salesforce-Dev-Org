@@ -1,0 +1,7 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global">
+    <aura:attribute name="childAttr" type="String" />
+    <aura:method name="updateCAttr" action="{!c.updateChildAttr}"/>
+    <p>childExpr childAttr: {!v.childAttr}</p>
+    <p><lightning:button label="Update childAttr" 
+          onclick="{!c.updateChildAttr}"/></p>
+</aura:component>

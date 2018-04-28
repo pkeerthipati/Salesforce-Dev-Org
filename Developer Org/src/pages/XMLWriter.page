@@ -1,0 +1,17 @@
+<apex:page standardController="Order__c" extensions="NewOrderExtension,XMLWriter">
+<apex:form >
+<apex:pageBlock title="Baxter Rep Info">
+<apex:pageblockSection columns="1">
+<apex:inputfield value="{!Order__c.Rep_Name__c}"/>
+<apex:inputField value="{!Order__c.Rep_Phone__c}"/>
+<apex:outputLabel >Select an object</apex:outputLabel> 
+<apex:selectList value="{!selectedObject}" multiselect="false" size="1">
+                <apex:selectOption itemValue="Account" itemLabel="Account"/>
+                <apex:selectOption itemValue="Oppoutunity" itemLabel="Opportunity"/>
+                
+            </apex:selectList>
+</apex:pageblockSection>
+
+</apex:pageBlock>
+</apex:form>
+</apex:page>

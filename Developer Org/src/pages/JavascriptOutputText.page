@@ -1,0 +1,24 @@
+<apex:page controller="JavascriptOutputCtrl">
+<script>
+function onload(){
+            jQuery('.DisplayClass').each(function(){    
+            alert('Display Class'+jQuery(this));          
+               if(jQuery(this).val() != ''){
+                 
+               }               
+            })
+        }    
+</script>
+<Apex:form >
+<apex:pageBlock >
+<apex:pageBlockSection >
+<apex:commandButton value="Submit" action="{!Submit}" oncomplete="onload();" />
+</apex:pageBlockSection>
+<apex:pageBlockSection id="MySeciton">
+<apex:outputText styleClass="DisplayClass" value="{!Text1}"></apex:outputText>
+<apex:outputText styleClass="DisplayClass" value="{!Text2}"></apex:outputText>
+</apex:pageBlockSection>
+<apex:inputHidden id="testinput"/>
+</apex:pageBlock>
+</Apex:form>
+</apex:page>

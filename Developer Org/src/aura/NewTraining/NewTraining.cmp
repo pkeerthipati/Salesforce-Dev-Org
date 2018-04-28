@@ -1,0 +1,30 @@
+<aura:component controller="ContactCont" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:attribute name="Amount" type="double" default="25000"/>
+    <aura:attribute name="Tenure" type="double" default="12"/>
+    <aura:attribute name="Maturity" type="double" default="34"/>
+    <aura:attribute name="Conid" type="string" default=""/>
+    <aura:attribute name="ContactName" type="string" default=""/>
+    <aura:handler name="render" value="{!this}" action="{!c.onRender}"/>
+    <aura:handler name="change" value="{!v.Conid}" action="{!c.getContactName}"/>
+    <aura:handler name="change" value="{!v.Tenure}" action="{!c.displayerror}"/>
+    <aura:handler name="init" value="{!this}" action="{!c.oninit}"/>
+<div>
+	<!--<c:facetheader>
+    	<aura:set attribute="header1">
+        	Lightning Form
+        </aura:set>
+    </c:facetheader>  -->
+    Lightning Form
+    <ui:inputText label="ContId" value="{!v.Conid}"/>
+    <ui:inputText label="ContName" value="{!v.ContactName}"/>
+    <ui:inputText label="Coupon Amount" value="{!v.Amount}"/>
+    <ui:inputText aura:id="tenure" label="Coupon tenure" value="{!v.Tenure}"/>
+</div> 
+<div>
+    <h2>Maturity amount will be:</h2><ui:outputNumber aura:id="outNo" class="changeMe" value="{!v.Maturity}" />
+    <br/><ui:button label="Calculate coupon returns" press="{!c.calculate1}"/>
+    <br/><lightning:button label="Remove CSS" onclick="{!c.remClass}"/>
+                                                      
+</div>  
+    <p aura:id="text1"> Tenure cantr be greater than 21 </p>
+</aura:component>

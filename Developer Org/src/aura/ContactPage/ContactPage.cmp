@@ -1,0 +1,117 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickAction" access="global" >
+    <div class="slds-page-header" role="banner">
+        <div class="slds-grid">
+            <div class="slds-col slds-has-flexi-truncate">
+                <!-- HEADING AREA -->
+                <h1 class="slds-page-header__title slds-truncate slds-align_absolute-center" title="My Accounts">Contact Hierarchy Management</h1>
+                <!-- / HEADING AREA -->
+            </div><br/>
+            
+        </div><br/><br/>
+        <div class="slds-grid">
+            <div class="slds-col slds-size--1-of-2">
+                <table width="100%">
+                    <tr>
+                        <td width="30%">    
+                            <label>First Name</label>
+                        </td>
+                        <td width="60%"> 
+                            <input type="text" id="text-input-id-1" class="slds-input" placeholder="Placeholder Text" />
+                        </td> 
+                        <td width="10%">
+                            
+                        </td>
+                    </tr>        
+                </table>
+            </div>
+            <div class="slds-col slds-size--1-of-2">
+                <table width="100%">
+                    <tr>
+                        <td width="30%">    
+                            <label>Last Name</label>
+                        </td>
+                        <td width="60%"> 
+                            <input type="text" id="text-input-id-1" class="slds-input" placeholder="Placeholder Text" />
+                        </td> 
+                        <td width="10%">
+                            
+                        </td>
+                    </tr>        
+                </table>
+            </div>
+            
+        </div><br/><br/>
+        
+        <div class="slds-grid">
+            <div class="slds-col slds-size--1-of-2">
+                <table width="100%">
+                    <tr>
+                        <td width="30%">    
+                            <label>Email</label>
+                        </td>
+                        <td width="60%"> 
+                            <input type="text" id="text-input-id-1" class="slds-input" placeholder="Placeholder Text" />
+                        </td> 
+                        <td width="10%">
+                            
+                        </td>
+                    </tr>        
+                </table>
+            </div>
+            <div class="slds-col slds-size--1-of-2">
+                
+            </div>
+            
+        </div><br/><br/><br/><br/>
+        
+        <div class="slds-grid">
+            <div class="slds-col slds-size--1-of-3">
+                <table width="100%">
+                    <tr>
+                        <td width="30%">    
+                            
+                        </td>
+                        <td width="40%"> 
+                            <lightning:button variant="brand" label="Create" onclick="{! c.createRecord }" />
+                        </td> 
+                        <td width="30%">
+                            
+                        </td>
+                    </tr>        
+                </table>
+            </div>
+            <div class="slds-col slds-size--1-of-3">
+                <table width="100%">
+                    <tr>
+                        <td width="30%">    
+                            
+                        </td>
+                        <td width="40%"> 
+                            <lightning:button variant="brand" label="Update" onclick="" />
+                        </td> 
+                        <td width="30%">
+                            
+                        </td>
+                    </tr>        
+                </table>  
+            </div>
+            <div class="slds-col slds-size--1-of-3">
+                <table width="100%">
+                    <tr>
+                        <td width="30%">    
+                            
+                        </td>
+                        <td width="40%" border="1"> 
+                            <lightning:button variant="brand" label="Delete" onclick="" />
+                        </td> 
+                        <td width="30%">
+                            
+                        </td>
+                    </tr>        
+                </table>  
+            </div>
+            
+        </div>
+    </div>
+    
+</aura:component>

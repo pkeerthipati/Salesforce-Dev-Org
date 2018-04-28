@@ -1,0 +1,105 @@
+<aura:component implements="force:appHostable" controller="Webkul_cm.VehicleListController">
+	<ltng:require styles="{!$Resource.Webkul_cm__SLDS +
+	         '/assets/styles/salesforce-lightning-design-system-ltng.css'}"/>
+    <aura:registerEvent name="sampleVehicleEvent" type="Webkul_cm:VehicleEvent"/>
+    <aura:handler name="init" value="{!this}" action="{!c.getRoute}"/>
+	<aura:attribute name="vehicles" type="Webkul_cm__Vehicle__c[]"/>
+    <aura:attribute name="Routes" type="Webkul_cm__Route__c[]"/>
+	<aura:attribute name="newVehicle" type="Webkul_cm__Vehicle__c"
+         default="{ 'sobjectType': 'Webkul_cm__Vehicle__c',
+                         'Name': '',
+                         'Webkul_cm__Number_of_Seats__c': 0,
+                         'Webkul_cm__Average_Speed__c': 0,
+                         'Webkul_cm__License_Plate__c': '',
+                         'Webkul_cm__License_Expiration_Date__c': '',
+                  		 'Webkul_cm__Fuel__c': '',
+                  		 'Webkul_cm__Fuel_Economy__c': 0,
+                  		 'Webkul_cm__Fuel_Cost__c': 0,
+                  		 'Webkul_cm__A_C__c': 'False',
+                  		 'Webkul_cm__Active__c': 'False',
+                  		 'Webkul_cm__Description__c':'',
+                  		 'Webkul_cm__Route__c':''
+                       }"/>
+	<div class ="wk_static">        
+        <div class="modal-body scrollable slds-modal__content slds-p-around--medium parent">
+        	<div c-lass= "slds-form--stacked">
+                <div class="slds-form-element">
+                    <div class="slds-form-element slds-is-required">
+                        <div class="slds-form-element__control">
+                        	<ui:inputText aura:id="vName" label="Vehicle Name" class="slds-input" labelClass="slds-form-element__label" value="{!v.newVehicle.Name}" required="true"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-form-element">
+                    <div class="slds-form-element__control">
+                    	<ui:inputnumber aura:id="vSeats" label="Number Of Seats" class="slds-input" labelClass="slds-form-element__label" value="{!v.newVehicle.Webkul_cm__Number_of_Seats__c}" required="true"/>           
+                    </div>
+                </div>
+                <div class="slds-form-element">
+                    <div class="slds-form-element__control">
+                    	<ui:inputnumber aura:id="vSpeed" label="Average Speed" class="slds-input" labelClass="slds-form-element__label" value="{!v.newVehicle.Webkul_cm__Average_Speed__c}"/>           
+                    </div>
+                </div>
+                <ui:inputSelect aura:id="SelectRoute" label="Select Route" class="slds-input" labelClass="slds-form-element__label" value="{!v.newVehicle.Webkul_cm__Route__c}" >
+                	<ui:inputSelectOption text="" label="--None--"/>
+                    	<aura:iteration items="{!v.Routes}" var="Routes">
+                        	<ui:inputSelectOption text="{!Routes.Id}" label="{!Routes.Name}"/>
+                        </aura:iteration>
+                </ui:inputSelect>
+                <div class="slds-form-element">
+                    <div class="slds-form-element__control">
+                    	<ui:inputText aura:id="vLicense" label="Vehicle Registration Number" class="slds-input" labelClass="slds-form-element__label" value="{!v.newVehicle.Webkul_cm__License_Plate__c}" required="true"/>           
+                    </div>
+                </div>
+                <div class="slds-form-element">
+                    <div class="slds-form-element__control">
+                    	<ui:inputDate aura:id="vLicenseDate" label="License Expiration Date" class="slds-input" labelClass="slds-form-element__label" value="{!v.newVehicle.Webkul_cm__License_Expiration_Date__c}" required="true" displayDatePicker="true"/>           
+                    </div>
+                </div>
+                <div class="slds-form-element">
+                    <div class="slds-form-element__control">
+                        <ui:inputSelect label="Fuel" aura:id="vFuel" class="slds-input" labelClass="slds-form-element__label" value="{!v.newVehicle.Webkul_cm__Fuel__c}">
+                            <ui:inputselectOption text="" label="--None--"/>
+                            <ui:inputselectOption text="Petrol" label="Petrol"/>
+                            <ui:inputselectOption text="Diesel" label="Diesel"/>
+                        	<ui:inputselectOption text="CNG" label="CNG"/>
+                        </ui:inputSelect>
+                    </div>
+                </div>
+                <div class="slds-form-element">
+                    <div class="slds-form-element__control">
+                    	<ui:inputCurrency aura:id="vFuelEco" maxlength="3" label="Fuel Economy" class="slds-input" labelClass="slds-form-element__label" value="{!v.newVehicle.Webkul_cm__Fuel_Economy__c}"/>           
+                    </div>
+                </div>
+                <div class="slds-form-element">
+                    <div class="slds-form-element__control">
+                    	<ui:inputCurrency aura:id="vFuelCost" label="Fuel Cost" class="slds-input" labelClass="slds-form-element__label" value="{!v.newVehicle.Webkul_cm__Fuel_Cost__c}"/>           
+                    </div>
+                </div>
+                <div class="slds-form-element">
+                    <div class="slds-form-element__control">
+                    	<ui:inputCheckBox aura:id="vAC" label="A/C" class="slds-checkbox" labelClass="slds-form-element__label" value="{!v.newVehicle.Webkul_cm__A_C__c}"/>           
+                    </div>
+                </div>
+                <div class="slds-form-element">
+                    <div class="slds-form-element__control">
+                    	<ui:inputCheckBox aura:id="vActive" label="Active" class="slds-checkbox" labelClass="slds-form-element__label" value="{!v.newVehicle.Webkul_cm__Active__c}"/>           
+                    </div>
+                </div>
+                <div class="slds-form-element">
+                    <div class="slds-form-element__control">
+                    	<ui:inputTextarea aura:id="vDes" label="Description" class="slds-input" labelClass="slds-form-element__label" value="{!v.newVehicle.Webkul_cm__Description__c}"/>           
+                    </div>
+                </div>
+            </div>        
+        </div>
+       	<div class="slds-modal__footer">
+           	<div class="slds-form-element">
+               	<div class="slds-form-element__control">
+                   	<ui:button aura:id="button1" class="slds-button slds-button--neutral slds-not-selected" press="{!c.removeComponent}">Cancel</ui:button>
+                    <ui:button class="slds-button slds-button--neutral slds-button--brand slds-not-selected" press="{!c.createVehicle}">Save</ui:button>                            
+                </div>
+            </div>
+        </div>
+    </div>    
+</aura:component>

@@ -1,0 +1,95 @@
+<aura:component implements="force:appHostable" controller="Webkul_cm.BookingListController">
+    <ltng:require styles="{!$Resource.Webkul_cm__SLDS +
+	         '/assets/styles/salesforce-lightning-design-system-ltng.css'}"/>
+    
+    <aura:attribute name="massDeleteList" type="String[]"/>
+    <aura:attribute name="bookings" type="Webkul_cm__Booking__c[]"/>
+    
+    <aura:attribute name="route" type="Webkul_cm__Route__c[]"/>
+    <aura:attribute name="routeId" type="String"/>   
+
+    <aura:attribute name="dropPoint" type="Webkul_cm__Drop_Point__c[]"/>
+	<aura:attribute name="dropPointId" type="String"/>  
+    
+    <aura:attribute name="timeSlot" type="Webkul_cm__Time_Slot__c[]"/>
+	<aura:attribute name="timeSlotId" type="String"/>  
+    
+    <aura:attribute name="vehicle" type="Webkul_cm__Vehicle__c[]"/>
+    <aura:attribute name="vehicleId" type="String"/>
+    
+    <aura:attribute name="bookingDate" type="Date"/>
+    
+    <aura:method name="updateList" action="{!c.getBookings}"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.getBookings}" />
+    
+	<div class ="wk_static">        
+        <div class="slds-page-header" role="banner">
+            <div class="slds-grid">
+                <div class="slds-col slds-has-flexi-truncate">
+                    <div class="slds-media slds-media--center slds-no-space slds-grow">
+                        <div class="slds-media__figure">
+                            <span class="slds-icon_container slds-icon-custom-custom45">
+                                <Webkul_cm:VehicleSVG class="slds-icon" xlinkHref="{!$Resource.Webkul_cm__SLDS +'/assets/icons/custom-sprite/svg/symbols.svg#custom45'}" />
+                                <span class="slds-assistive-text">Booking</span>
+                            </span>
+                        </div>
+                        <div class="slds-media__body">
+                            <p class="slds-text-heading--label slds-truncate">Bookings</p>
+                            <h1 class="slds-page-header__title slds-m-right--small slds-truncate slds-align-middle" title="List View">List View</h1>
+                        </div>
+                    </div>                 
+                </div>
+                <div class="slds-col">
+                	<ui:button class="slds-button slds-button--destructive slds-p-horizontal--xx-small slds-float--right" press="{!c.deleteList}">
+                        <span>
+                            <Webkul_cm:VehicleSVG class="slds-button__icon slds-button__icon--large" xlinkHref="{!$Resource.Webkul_cm__SLDS +'/assets/icons/action-sprite/svg/symbols.svg#delete'}" />
+                            <span class="slds-assistive-text">Delete</span>
+                        </span>                	
+                    </ui:button>
+                </div>
+            </div>
+        </div> 
+		<div class="slds-grid">
+        
+        </div>        
+        <table class="slds-table slds-table--bordered slds-max-medium-table--stacked-horizontal dropPointTable">
+            <thead>
+                <tr class="slds-text-heading--label ">
+                    <th class="" scope="col">Action</th>
+                    <th class="action" scope="col">Name</th>
+                    <th class="slds-is-sortable" scope="col">Route</th>
+					<th class="slds-is-sortable" scope="col">Drop Point</th>
+                    <th class="slds-is-sortable" scope="col">Booking Date</th>
+                    <th class="slds-is-sortable" scope="col">Time Slot</th>
+                    <th class="slds-is-sortable" scope="col">Vehicle</th> 
+                </tr>  
+            </thead>
+            <tbody>
+                <aura:iteration items="{!v.bookings}" var="key">
+                    <tr class="slds-hint-parent">
+                        <td data-label="Action" class="action">
+                          <ui:inputCheckbox label="" class="check" text="{!key.Id}" aura:id="dependent"/>
+                        </td>
+                        <td data-label="Name" class="action">
+                          <a href="{! '#/sObject/' + key.Id + '/view'}">{!key.Name}</a>
+                        </td>
+                        <td data-label="Route" class="action">
+                          <a href="{! '#/sObject/' + key.Webkul_cm__Route__c + '/view'}">{!key.Webkul_cm__Route__r.Name}</a>
+                        </td>
+                        <td data-label="Drop Point" class="action">
+                          <a href="{! '#/sObject/' + key.Webkul_cm__Drop_Point__c + '/view'}">{!key.Webkul_cm__Drop_Point__r.Name}</a>
+                        </td>
+                        <td data-label="Booking Date" class="action">{!key.Webkul_cm__Booking_Date__c}</td>
+                        <td data-label="Time Slot" class="action">
+                          <a href="{! '#/sObject/' + key.Webkul_cm__Time_Slot__c + '/view'}">{!key.Webkul_cm__Time_Slot__r.Name}</a>
+                        </td>
+                        <td data-label="Vehicle" class="action">
+                          <a href="{! '#/sObject/' + key.Webkul_cm__Vehicle__c + '/view'}">{!key.Webkul_cm__Vehicle__r.Name}</a>
+                        </td>
+                    </tr>
+                </aura:iteration>
+            </tbody>
+        </table>
+    </div> 
+</aura:component>

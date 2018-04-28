@@ -1,0 +1,40 @@
+<apex:page controller="SearchEmailSubjectController">
+    <apex:form >
+        <apex:pageBlock title="Search Email Alerts">
+            <apex:pageBlockSection >
+                <apex:pageblocksectionItem >
+                    <apex:outputText >Search text</apex:outputText>
+                    <apex:inputText value="{!searchText}"/>
+                </apex:pageblocksectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:commandButton value="Search" action="{!search}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageblocktable value="{!nWList}" var="n">
+                    <apex:column headerValue="">
+                        <apex:facet name="header" >Object Name</apex:facet>
+                        <apex:outputText value="{!n.objectname}" title="Object Name" />
+                    </apex:column>  
+                    <apex:column >
+                        <apex:facet name="header" >Email Alert Name</apex:facet>  
+                        <apex:commandLink action="{!gotoLink}" target="_tab">
+                            <apex:param name="myParam" value="{!n.ruleId}" assignTo="{!myParam}"/>
+                            <apex:outputtext value="{!n.rulename}" title="Email Alert Name"/>
+                            
+                        </apex:commandLink>
+                    </apex:column>
+                </apex:pageblocktable>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection >
+                <apex:pageblocksectionItem >
+                    <apex:outputText >Search Profile text</apex:outputText>
+                    <apex:inputText value="{!searchProfileText}"/>
+                </apex:pageblocksectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:commandButton value="Search" action="{!searchProfile}"/>
+                </apex:pageBlockSectionItem>
+                
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

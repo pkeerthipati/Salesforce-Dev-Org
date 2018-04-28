@@ -1,0 +1,19 @@
+<aura:component controller="ContactController1" access="global" >
+    <aura:attribute name="contacts" type="contact[]"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+     <aura:attribute name="messageFromEvent" type="string"/>
+     <aura:handler name="cmpEvent" event="c:sampleEvent" action="{!c.handlerComponentEventincontact}" />
+    <aura:handler name="cmpEvent" event="c:Searchkey" action="{!c.handlerComponentEventincontact}" />
+    <aura:handler event="aura:locationchange" aura:id="lChange" action="{!c.doSearchById}"/>
+    <c:CeNotifier />
+    <input type="text" class="form-control" onkeyup="{!c.doSearch}" placeholder="Search"/>
+    <li class="list-group--item">
+        <aura:iteration var="contact" items="{!v.contacts}">
+  			 <a href="{! '#contact/'+contact.Id}" >
+                    <p>{!contact.Name} ::::{!v.messageFromEvent}</p>
+                    <p>{!contact.Phone}</p>
+                </a> 
+		</aura:iteration> 
+               
+   </li> 
+</aura:component>

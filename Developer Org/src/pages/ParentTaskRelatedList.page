@@ -1,0 +1,48 @@
+<apex:page standardController="Task"  extensions="ParentTaskRelatedListController" showHeader="false" sidebar="false">
+<apex:form >
+<apex:pageBlock title="Child tasks">
+<apex:pageblockSection >
+<apex:pageblockTable value="{!childTasks}" var="ct">
+  <apex:column >
+    <apex:facet name="header" >Id</apex:facet>
+    
+    <apex:outputLink value="/{!CT.Id}">{!CT.Id}</apex:outputLink>
+
+  </apex:column>
+  <apex:column >
+    <apex:facet name="header" >Related to Object</apex:facet>
+    <apex:outputText value="{!CT.What.Name}" />
+  </apex:column>
+  <!--<apex:column >
+    <apex:facet name="header" >Related to Object</apex:facet>
+    <apex:outputText value="{!CT.WhatId}" />
+  </apex:column>-->
+  <apex:column >
+    <apex:facet name="header" >Related to Contact</apex:facet>
+    <apex:outputText value="{!CT.Who.Name}" />
+  </apex:column>
+  <!--<apex:column >
+    <apex:facet name="header" >Related to Contact</apex:facet>
+    <apex:outputText value="{!CT.WhoId}" />
+  </apex:column>-->
+  <apex:column >
+    <apex:facet name="header" >Subject</apex:facet>
+    <apex:outputText value="{!CT.Subject}" />
+  </apex:column>
+  <apex:column >
+    <apex:facet name="header" >Status</apex:facet>
+    <apex:outputText value="{!CT.Status}" />
+  </apex:column>
+  </apex:pageblockTable>
+<!--<apex:repeat value="{!childTasks}" var="CT" id="theRepeat">
+<apex:outputText value= "{!CT.Id"} />
+<apex:outputText value= "{!CT.WhatId"} />
+<apex:outputText value= "{!CT.WhoId"}/>
+<apex:outputText value= "{!CT.Subject"} />
+<apex:outputText value= "{!CT.Status"} />
+<apex:outputText value= "{!CT.pkeerthipati__Parent_Task_Id__c"}/>
+</apex:repeat> -->
+</apex:pageblockSection>
+</apex:pageBlock>
+</apex:form>
+</apex:page>

@@ -1,0 +1,40 @@
+<aura:component implements="force:appHostable" controller="Webkul_cm.GetRouteDp">
+	<ltng:require styles="{!$Resource.Webkul_cm__SLDS +
+	         '/assets/styles/salesforce-lightning-design-system-ltng.css'}"/>
+    <aura:handler name="init" value="{!this}" action="{!c.getMap}"/>
+    <aura:registerEvent name="RouteEvent" type="Webkul_cm:VehicleEvent"/>
+    <aura:attribute name="Routes" type="Webkul_cm__Route__c[]"/>
+    <aura:attribute name="frameSrc" type="String"/>
+    <aura:attribute name="routeName" type="String"/>
+    <!--<aura:attribute name="location" type="Location__c[]"/>--> 
+    
+    <div class="wk_static">    	
+        <div class="modal-body scrollable slds-modal__content slds-p-around--xx-small parent">
+        	<div class="slds-grid slds-grid--vertical-align-center slds-wrap ">
+                <div class="slds-size--1-of-1 slds-p-horizontal--xx-small">
+                    <div class="" style="margin: 0 auto">
+                        <div class="slds-form--stacked">
+                                <div class="slds-form-element slds-is-required">
+                                    <div class="slds-form-element__control">
+                                        <ui:inputText aura:id="RName" placeholder="Fill this field at first" label="Route Name" class="slds-input" labelClass="slds-form-element__label" value="{!v.routeName}" blur="{!c.reflectRoute}" required="true"/>
+                                    </div>
+                                </div>                   
+                        </div>
+                        <div >
+                            <div class = "framediv" >
+                                <iframe id="myFrame" ref="myFrame" style="height: 100%;width: 100%;border: none;" src="{!v.frameSrc}"/>                    
+                            </div>                
+                        </div>
+                    </div>
+                </div>            
+            </div>
+        </div>
+        <div class="slds-modal__footer">
+            <div class="slds-form-element">
+                <div class="slds-form-element__control">
+                    <ui:button aura:id="button1" class="slds-button slds-button--brand slds-not-selected slds-p-horizontal--x-small" press="{!c.SaveRecords}">Save &amp; Close</ui:button>
+                </div>
+            </div>
+       </div>
+    </div>    
+</aura:component>

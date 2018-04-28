@@ -1,0 +1,105 @@
+<aura:component implements="force:appHostable" controller="Webkul_cm.RouteListController">
+	<ltng:require styles="{!$Resource.Webkul_cm__SLDS +
+	         '/assets/styles/salesforce-lightning-design-system-ltng.css'}"/>
+    <aura:attribute name="massDeleteList" type="String[]"/>
+    <aura:attribute name="Routes" type="Webkul_cm__Route__c[]"/>
+    <aura:handler name="init" value="{!this}" action="{!c.getRoute}" />
+    <aura:method name="updateList" action="{!c.getRoute}"/>
+    <aura:handler name="RouteEvent" action="{!c.handleremovecss}" event="Webkul_cm:VehicleEvent"/>
+	<div class ="wk_static">
+        <div class="slds-page-header" role="banner">
+            <div class="slds-grid slds-grid--vertical-align-end">
+                <div class="slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 slds-has-flexi-truncate">
+                    <div class="slds-media slds-media--center slds-no-space slds-grow">
+                        <div class="slds-media__figure">
+                            <span class="slds-icon_container slds-icon-custom-custom78">
+                                <Webkul_cm:VehicleSVG class="slds-icon" xlinkHref="{!$Resource.Webkul_cm__SLDS +'/assets/icons/custom-sprite/svg/symbols.svg#custom78'}" />
+                                <span class="slds-assistive-text">Route Icon</span>
+                            </span>
+                        </div>
+                        <div class="slds-media__body">
+                            <p class="slds-text-heading--label slds-truncate">Routes</p>
+                            <h1 class="slds-page-header__title slds-m-right--small slds-truncate slds-align-middle" title="List View">List View</h1>
+                        </div>
+                    </div>                    
+                </div>
+                <div class="slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                    <ui:button class="slds-button slds-p-horizontal--xx-small slds-m-right--x-small slds-float--right color"  press="{!c.applycss}">
+                    	<span>
+                        	<Webkul_cm:VehicleSVG class="slds-button__icon slds-button__icon--large" xlinkHref="{!$Resource.Webkul_cm__SLDS +'/assets/icons/utility-sprite/svg/symbols.svg#add'}" />
+                            <span class="slds-assistive-text">Add</span>
+                        </span> 
+                    </ui:button>
+                                        
+                    <ui:button class="slds-button slds-button--destructive slds-p-horizontal--xx-small slds-m-right--x-small slds-float--right" press="{!c.deleteList}">
+                    	<span>
+                        	<Webkul_cm:VehicleSVG class="slds-button__icon slds-button__icon--large" xlinkHref="{!$Resource.Webkul_cm__SLDS +'/assets/icons/action-sprite/svg/symbols.svg#delete'}" />
+                            <span class="slds-assistive-text">Delete</span>
+                        </span>                	
+                    </ui:button>
+                </div>
+            </div>
+        </div>  
+        <table class="slds-table slds-table--bordered slds-max-medium-table--stacked-horizontal">
+            <thead>
+                <tr class="slds-text-heading--label ">
+                    <th class="slds-is-sortable" scope="col">
+                        <ui:inputCheckbox label="" class="check" aura:id="master" click="{!c.checkAll}"/>
+						Action                        
+                    </th>
+                    <th class="action" scope="col">Route</th>                    
+                    <th class="slds-is-sortable" scope="col">Start Point</th>
+                    <th class="slds-is-sortable" scope="col">End Point</th>           
+                </tr>  
+            </thead>
+            <tbody>
+                <aura:iteration items="{!v.Routes}" var="route">
+                    <tr class="slds-hint-parent">
+                        <td data-label="Action" class="action">
+                        	<ui:inputCheckbox label="" class="check" text="{!route.Id}" aura:id="dependent"/>
+                        </td>
+                        <td data-label="Route" class="action">
+                        	<a href="{! '#/sObject/' + route.Id + '/view'}">{!route.Name}</a>
+                        </td>
+                        <td data-label="Start Point" class="action">{!route.Webkul_cm__Start_Point__c}</td>
+                        <td data-label="End Point" class="action">{!route.Webkul_cm__End_Point__c}</td>
+                    </tr>
+                </aura:iteration>
+            </tbody>
+        </table>
+		<div role="dialog" tabindex="-1" aura:id="Modalbox" aria-labelledby="header43" class="slds-modal ">
+            <div>
+                <div class="slds-modal__container ">
+                    <div class="slds-modal__header">                
+                        <button class="slds-button slds-button--icon-inverse slds-modal__close" onclick="{!c.handleremovecss}">
+                            <span>
+                                <Webkul_cm:VehicleSVG class="slds-button__icon slds-button__icon--large" xlinkHref="{!$Resource.Webkul_cm__SLDS +'/assets/icons/action-sprite/svg/symbols.svg#close'}" />
+                                <span class="slds-assistive-text">Close</span>
+                            </span>                	
+                        </button>
+                        <div class="slds-grid">
+                            <div class="slds-col slds-has-flexi-truncate">
+                                <div class="slds-media slds-media--center slds-no-space slds-grow">
+                                    <div class="slds-media__figure">
+                                        <span class="slds-icon_container slds-icon-custom-custom78">
+                                            <Webkul_cm:VehicleSVG class="slds-icon" xlinkHref="{!$Resource.Webkul_cm__SLDS +'/assets/icons/custom-sprite/svg/symbols.svg#custom78'}" />
+                                            <span class="slds-assistive-text">Route Icon</span>
+                                        </span>
+                                    </div>
+                                    <div class="slds-media__body">
+                                        <p class="slds-text-heading--label slds-truncate">Route</p>
+                                        <h1 class="slds-page-header__title slds-m-right--small slds-truncate slds-align-middle" title="Add Drop Points">Create Route</h1>
+                                    </div>                        
+                                </div>
+                            </div>            	             
+                         </div>
+                    </div>                    
+                    <div aura:id="cmpBody">
+                    	<Webkul_cm:Route />             
+                    </div>                    
+                </div>
+            </div>
+        </div>
+		<div class="slds-backdrop" aura:id="MB-Back"></div>        
+    </div>   
+</aura:component>

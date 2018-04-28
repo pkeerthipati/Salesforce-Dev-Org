@@ -1,0 +1,65 @@
+<apex:page sidebar="false">
+ <apex:pageBlock title="Opportunity Edit" >
+ <apex:pageBlockSection title="Opportunity Information" columns="2" collapsible="false">
+ <apex:form >
+
+<tr>
+ <apex:outputText >Opportunity Name  </apex:outputText> 
+ <td>
+ <apex:inputText /></td>
+ </tr>
+
+ <td>
+ 
+ <apex:outputText >Account</apex:outputText> 
+  
+ <apex:inputText />
+ </td>
+ 
+ 
+ 
+ <apex:outputText >Account Name</apex:outputText> 
+  
+ <apex:inputText />
+
+ 
+ 
+ <td>
+ <apex:outputText >Probability (%)</apex:outputText> 
+  
+ <apex:inputText />
+ 
+ </td>
+ </apex:form>
+ </apex:pageBlockSection>
+ 
+ <apex:pageBlockSection title="Additional Information" columns="2">
+ <apex:form >
+<tr>
+<td>
+<apex:outputText >Order Number</apex:outputText> 
+<apex:inputText />
+</td>
+</tr>
+<tr>
+<td>
+ <apex:outputText >Current Generator(s)</apex:outputText> 
+ <apex:inputText />
+ </td>
+ </tr>
+ 
+ 
+ <tr>
+ <td>
+ <apex:outputText >Tracking Number</apex:outputText> 
+  
+ <apex:inputText />
+ </td>
+ </tr>
+ </apex:form>
+ </apex:pageBlockSection>
+ 
+ 
+ 
+ </apex:pageBlock>
+</apex:page>

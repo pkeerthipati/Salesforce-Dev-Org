@@ -1,0 +1,113 @@
+<apex:page id="thePage" applyHtmlTag="false" applyBodyTag="false" docType="html-5.0" showHeader="false" standardcontroller="Webkul_cm__Route__c" extensions="Webkul_cm.GetWayPoints" standardStylesheets="false">
+    <apex:includescript value="{!urlfor($Resource.Webkul_cm__JQuery,'/Jquery/jquery_3.1.1.min.js')}"/>
+    <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" lang="en">
+      <head>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
+        <meta charset="utf-8"/>
+        <title>Directions service</title>
+        <style>
+          html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+          }
+          #map {
+            height: 100%;
+          }       
+          #Mybutton{
+            display: none;
+          }
+        </style>
+      </head>
+      <body>
+        <apex:form id="theForm">
+            <apex:inputhidden id="start" value="{!Webkul_cm__Route__c.Webkul_cm__Start_Point__c}" />    
+            <apex:inputhidden id="end" value="{!Webkul_cm__Route__c.Webkul_cm__End_Point__c}"/>
+            <button type="button" id="Mybutton">Mybutton</button>  
+        </apex:form>
+        <div id ="map"></div>
+        <script>
+          var waypts = [];  
+          function initMap() {
+            var directionsService = new google.maps.DirectionsService;
+            var directionsDisplay = new google.maps.DirectionsRenderer({ 
+                                                                            suppressMarkers: true
+                                                                        });
+            var map = new google.maps.Map(document.getElementById('map'), {
+              zoom: 7,
+              center: {lat: 28.6139, lng: 77.2090}
+            });
+            directionsDisplay.setMap(map);
+            var st;
+            var ed;
+            $( document ).on("click" ," #Mybutton ",function(){
+                st =$("[id$='start']").val();
+                ed =$("[id$='end']").val();
+                createMarker($("[id$='start']").val(),true);
+                createMarker($("[id$='end']").val(),false);
+                
+                function createMarker(str,bool){        
+                    var location;
+                    var image;
+                    var geocoder =  new google.maps.Geocoder();
+                    geocoder.geocode({'address':str},function(results,status){
+                        if(status==google.maps.GeocoderStatus.OK){
+                            location= new google.maps.LatLng(parseFloat(results[0].geometry.location.lat()),parseFloat(results[0].geometry.location.lng()));                                
+                        }                   
+                        if(bool==true){                             
+                            image = "{!URLFOR($Resource.cab,'/cab/StartPoint.png')}";
+                        }else if(bool==false){                              
+                            image = "{!URLFOR($Resource.cab,'/cab/EndPoint.png')}";
+                        }else{
+                            image = "{!URLFOR($Resource.cab,'/cab/Icon1.png')}";
+                        }              
+                        var marker = new google.maps.Marker({
+                            position: location,
+                            map: map,
+                            icon: image,
+                            title: str
+                        });
+                        var infowindow = new google.maps.InfoWindow({
+                            content:  str
+                        });
+                        marker.addListener('click', function() {
+                            infowindow.open(map, marker);
+                        });
+                            
+                    });
+                }
+                 var drpnts = JSON.parse('{!JSENCODE(drppnts)}');
+                  for (var i = 0; i < drpnts.length; i++) {
+                        waypts.push({
+                          location: drpnts[i],
+                          stopover: true
+                        });
+                        createMarker(drpnts[i]);                                          
+                  }
+                calculateAndDisplayRoute(directionsService, directionsDisplay);
+            });
+            if($("[id$='start']").val()!=null && $("[id$='start']").val()!=st && $("[id$='end']").val()!=null && $("[id$='end']").val()!=ed){
+                $("#Mybutton").trigger("click");
+            }               
+            
+          }
+          function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+            directionsService.route({
+              origin: $("[id$='start']").val(),
+              destination: $("[id$='end']").val(),
+              waypoints:waypts,
+              optimizeWaypoints: true,
+              travelMode: 'DRIVING'
+            }, function(response, status) {
+              if (status === 'OK') {
+                directionsDisplay.setDirections(response);               
+              } else {
+                //window.alert('Directions request failed due to ' + status);
+              }
+            });
+          }
+        </script>
+        <script async="true" defer="true" src="{!urlfor($Resource.JQuery,'/Jquery/map.js')}"/>
+      </body>
+    </html>
+</apex:page>

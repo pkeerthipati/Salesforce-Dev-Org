@@ -1,0 +1,7 @@
+<apex:page controller="RemotingDemo">
+  <apex:includeScript value="{!$Resource.TestJS}"/>
+  <apex:form >
+    <apex:commandButton onclick="callActFun();" value="Click"/>
+  </apex:form>
+  
+</apex:page>

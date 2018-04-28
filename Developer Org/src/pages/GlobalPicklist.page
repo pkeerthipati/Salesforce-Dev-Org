@@ -1,0 +1,14 @@
+<apex:page controller="GlobalPicklistController">
+<apex:form >
+<apex:pageblock >
+<apex:pageBlockSection >
+    <apex:inputField value="{!acc.name}"/>
+    <!--<apex:inputField value="{!acc.Global_Country__c}"/>
+    <!--<apex:inputField id="state" value="{!acc.Global_State__c}"/>
+    <apex:selectList size="1" value="{!selectedState}">
+      <apex:selectOptions value="{!statesLst}"/>
+    </apex:selectList> <br/>-->
+</apex:pageBlockSection>
+</apex:pageblock>
+</apex:form>
+</apex:page>

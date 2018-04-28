@@ -1,0 +1,34 @@
+.THIS {
+}
+.THIS .slds-input.length{
+    width: 120px;
+    margin-left: 0.5rem;
+}
+.THIS .slds-input.lengthDate{
+    width: 150px;
+    margin-left: 2rem;
+}
+
+.THIS .slds-table td.action,.THIS .slds-table th.action{
+    padding-left: 0;
+}
+.THIS .uiInput--datetime .datePicker-openIcon{
+    top:6px;    
+}
+.THIS button.slds-button.Gobtn{
+        margin-top: -32px;
+}
+.THIS .slds-form-element__label.labelCl{
+    margin-left: 10px;
+}
+.THIS input.uiInput--checkbox.check{
+    display:inline-block;
+	margin-left: 0.25rem;    
+}
+@media screen and (max-width: 786px)
+{   
+   
+    .THIS .slds-table td.action{
+        padding-left: 0.5rem;
+    }
+}

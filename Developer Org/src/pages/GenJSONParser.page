@@ -1,0 +1,32 @@
+<apex:page controller="GenericJSONParser">
+<apex:form >
+    <apex:pageBlock >
+    <apex:pageblocksection columns="1">
+        
+            <apex:outputText >Enter Search String in the format : parentObject="Account"/parentObjectFields="Id,Name"/searchParentFilter="Name = 'GenePoint'"/childObject="Contacts"/childObjectFields="Id,Name"/searchChildFilter="Name = 'Testing'"</apex:outputText>
+        
+    </apex:pageblocksection>
+    <apex:pageMessages ></apex:pageMessages>
+    <apex:pageBlockSection >
+        <apex:outputText >Enter Parent Object</apex:outputText>
+        <apex:inputText title="Enter Parent Object" value="{!parentObj}"/>
+        <apex:outputText >Enter Child Object</apex:outputText>
+        <apex:inputText title="Enter Child Object" value="{!childObj}"/>
+        <apex:outputText >Enter Relationship field</apex:outputText>
+        <apex:inputText title="Enter Relationship field" value="{!relationshipID}"/>
+        <apex:outputText >Enter filter fields</apex:outputText>
+        <apex:inputText title="Enter filter fields" value="{!filter}"/>
+        <apex:outputText >Enter filter criteria</apex:outputText>
+        <apex:inputText title="Enter filter criteria" value="{!filterValue}"/>
+        <apex:outputText >Enter the URL</apex:outputText>
+        <apex:inputText title="Enter the URL" value="{!url}"/>
+        <apex:commandButton value="Submit" action="{!prepareData}"/>
+        <apex:commandButton value="URL Submit" action="{!prepareDataURL}"/>
+    </apex:pageBlockSection>    
+    <apex:pageblockSection >
+        <apex:outputText > Response :</apex:outputText>
+        <apex:outputText value="{!jsonString }"/>
+    </apex:pageblockSection>
+    </apex:pageBlock>
+</apex:form>    
+</apex:page>

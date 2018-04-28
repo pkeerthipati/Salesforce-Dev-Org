@@ -1,0 +1,17 @@
+<aura:component >
+    
+    
+    <div class="slds-card slds-p-top--medium">
+        <header class="slds-page-header">
+            <h1 class="slds-text-heading--small">Camping List </h1>
+        </header>
+        
+        <section class="slds-card__body">
+            <div id="list" class="row">
+                
+                    <c:campingList />
+                
+            </div>
+        </section>
+    </div>
+</aura:component>

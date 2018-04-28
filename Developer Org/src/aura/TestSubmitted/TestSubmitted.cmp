@@ -1,0 +1,15 @@
+<!-- controller: getAccounts references the getAccounts.apxc Apex class -->
+ <aura:component implements="flexipage:availableForAllPageTypes,force:hasRecordId,force:lightningQuickAction" controller="getAccounts">
+
+<!-- This event handler calls the init client-side controller to handle initialization. -->
+<aura:handler name="init" action="{!c.init}" value="{!this}" />
+
+<!-- make the list of Account accessible to your component. -->
+<aura:attribute name="acc" type="Account" />
+
+<!-- define the recordId attribute -->
+<aura:attribute name="recordId" type="Id" />
+
+<p aura:id="text" style="display: none;">Now you see me</p>
+
+ </aura:component>

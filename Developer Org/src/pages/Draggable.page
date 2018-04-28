@@ -1,0 +1,106 @@
+<apex:page >
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+    <title>jQuery UI Droppable - Revert draggable position</title>
+      <link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css"/>
+        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+          <script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
+            <link rel="stylesheet" href="/resources/demos/style.css"/>
+              <style> 
+               #draggable1,#draggable2,#draggable3,#draggable4 { width: 100px; height: 100px; padding: 0.5em; float: left; margin: 10px 10px 10px 0; }
+               #droppable1,#droppable2,#droppable3,#droppable4 { width: 150px; height: 150px; padding: 0.5em; float: left; margin: 10px; }
+              </style>
+              <script>
+                $(function() {
+                    $( "#draggable1" ).draggable({ revert: "valid" });
+                    $( "#draggable2" ).draggable({ revert: "invalid" });
+                    $( "#draggable3" ).draggable({ revert: "invalid" });
+                    $( "#draggable4" ).draggable({ revert: "invalid" });
+                    
+                    $( "#draggable1" ).draggable({ revert: "invalid" });
+                    $( "#draggable2" ).draggable({ revert: "valid" });
+                    $( "#draggable3" ).draggable({ revert: "invalid" });
+                    $( "#draggable4" ).draggable({ revert: "invalid" });
+                    
+                    $( "#draggable1" ).draggable({ revert: "invalid" });
+                    $( "#draggable2" ).draggable({ revert: "invalid" });
+                    $( "#draggable3" ).draggable({ revert: "valid" });
+                    $( "#draggable4" ).draggable({ revert: "invalid" });
+                    
+                    $( "#draggable1" ).draggable({ revert: "invalid" });
+                    $( "#draggable2" ).draggable({ revert: "invalid" });
+                    $( "#draggable3" ).draggable({ revert: "invalid" });
+                    $( "#draggable4" ).draggable({ revert: "valid" });
+
+                    $( "#droppable1" ).droppable({
+                          activeClass: "ui-state-default",
+                          hoverClass: "ui-state-hover",      
+                          drop: function( event, ui ) {
+                              $( this )          
+                              .addClass( "ui-state-highlight" )          
+                              .find( "p" )            
+                              .html( "Dropped!" );      
+                              }    
+                    });  
+                    $( "#droppable2" ).droppable({
+                          activeClass: "ui-state-default",
+                          hoverClass: "ui-state-hover",      
+                          drop: function( event, ui ) {
+                              $( this )          
+                              .addClass( "ui-state-highlight" )          
+                              .find( "p" )            
+                              .html( "Dropped!" );      
+                              }    
+                    });
+                    $( "#droppable3" ).droppable({
+                          activeClass: "ui-state-default",
+                          hoverClass: "ui-state-hover",      
+                          drop: function( event, ui ) {
+                              $( this )          
+                              .addClass( "ui-state-highlight" )          
+                              .find( "p" )            
+                              .html( "Dropped!" );      
+                              }    
+                    });
+                    $( "#droppable4" ).droppable({
+                          activeClass: "ui-state-default",
+                          hoverClass: "ui-state-hover",      
+                          drop: function( event, ui ) {
+                              $( this )          
+                              .addClass( "ui-state-highlight" )          
+                              .find( "p" )            
+                              .html( "Dropped!" );      
+                              }    
+                    });
+                 });  
+                 </script>
+                 </head>
+                 <body> 
+                 <div id="draggable1" class="ui-widget-content">  
+                 <p>Ans 1</p>
+                 </div> 
+                 <div id="draggable2" class="ui-widget-content">  
+                 <p>Ans 2</p>
+                 </div>
+                 <div id="draggable3" class="ui-widget-content">  
+                 <p>Ans 3</p>
+                 </div>
+                 <div id="draggable4" class="ui-widget-content">  
+                 <p>Ans 4</p>
+                 </div> 
+                 <div id="droppable1" class="ui-widget-header">  
+                 <p>Ques 1</p>
+                 </div> 
+                 <div id="droppable2" class="ui-widget-header">  
+                 <p>Ques 2</p>
+                 </div> 
+                 <div id="droppable3" class="ui-widget-header">  
+                 <p>Ques 3</p>
+                 </div> 
+                 <div id="droppable4" class="ui-widget-header">  
+                 <p>Ques 4</p>
+                 </div>
+                 </body>
+                 </html>
+</apex:page>

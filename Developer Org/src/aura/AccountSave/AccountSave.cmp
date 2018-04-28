@@ -1,0 +1,25 @@
+<aura:component controller="AccountFieldClass" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:attribute name="accObj" type="Account" default="{'sobjectType':'Account'}"/> 
+    <div class="slds-page-header">
+  <div class="slds-media">
+    <div class="slds-media__figure">
+      <span class="slds-icon_container slds-icon-standard-opportunity" title="Description of icon when needed">
+      </span>
+    </div>
+    <div class="slds-media__body">
+      <h1 class="slds-page-header__title slds-truncate slds-align-middle" title="Page Header">Page header</h1>
+      <p class="slds-text-body_small slds-line-height_reset">Header</p>
+    </div>
+  </div>
+</div>
+<fieldset class="slds-form-element">
+
+<div class="slds-form-element__control">
+{!v.accObj.name}
+    <ui:inputText class="slds-input" value="{!v.accObj.Name}" label="Account name"/><br/>
+<ui:inputText value="{!v.accObj.AccountNumber}" label="AccountNumber"/>
+</div>
+<br/>
+</fieldset>
+<lightning:button variant="brand" label="Save as Draft" onclick="{!c.myAction }" /> 
+</aura:component>  

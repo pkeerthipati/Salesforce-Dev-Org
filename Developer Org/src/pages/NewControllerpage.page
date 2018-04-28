@@ -1,0 +1,19 @@
+<apex:page controller="FirstController">
+    <apex:form >
+        <apex:pageBlock >
+            <apex:pageBlockSection >
+                <apex:OutputText >Enter the Account Name</apex:OutputText>
+                <apex:inputText value="{!givenAccount}"/>
+                <apex:OutputText >Enter the Contact Name</apex:OutputText>
+                <apex:inputText value="{!givenContact}"/>
+                <apex:OutputText >Enter the Pursuit Name</apex:OutputText>
+                <apex:inputText value="{!givenPursuit}"/>
+            </apex:pageBlockSection>
+            <apex:commandButton value="Show name below" action="{!displayText}" />
+
+         </apex:pageBlock>
+         <apex:pageBlock rendered="{!bool}">
+                <apex:outputText value="The Account is {!givenAccount} and Contact is {!givenContact}"></apex:outputText>
+         </apex:pageBlock>
+    </apex:form>
+</apex:page>

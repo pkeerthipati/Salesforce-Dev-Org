@@ -1,0 +1,5 @@
+<apex:page controller="TreeCircleController">
+<apex:chart data="{!FieldNames}" height="100" width="100">
+    <apex:pieSeries labelField="name" dataField="data"/>
+</apex:chart>
+</apex:page>

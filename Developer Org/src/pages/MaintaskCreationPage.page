@@ -1,0 +1,19 @@
+<apex:page controller="TaskCreationController" action="{!debug}">
+    <apex:form >
+        <apex:pageBlock >
+            <apex:outputText value="{!taskIds}"/>
+            <div align="center">
+                    <apex:commandButton value="Create Parent task" action="{!createParentTask}"/>
+                </div>
+            <br/>  <br/> <br/>  
+            <apex:pageBlockSection columns="2">
+                
+                <apex:inputField value="{!parentTask.WhatId}" />
+                
+                <apex:inputField value="{!parentTask.Subject}" />
+                <apex:inputField value="{!parentTask.status}" />
+                <apex:inputField value="{!parentTask.description}" />
+                </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>
